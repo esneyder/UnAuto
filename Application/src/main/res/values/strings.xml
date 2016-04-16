@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="selected_place">Seleccionar Sitio</string>
+    <string name="place_details">
+    <![CDATA[
+        <b>%1$s</b>
+        <br/>
+        <i>Place Id: %2$s</i>
+        <br/>
+        Address: %3$s
+        <br/>
+        Phone: %4$s
+        <br/>
+        Website: %5$s
+    ]]>
+    </string>
+
+    <string name="parse_app_id">I8eqiaQUhqKBP2hy0yUGjFEusxc7uUlfyd2GY1g8</string>
+    <string name="parse_client_key">xN6q4rk84CN7WonIx6dqfMpo0hr1J7hMPchqFpke</string>
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_yes">Yes</string>
+    <string name="dialog_action_delete">Delete</string>
+    <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_error_title">Oops</string>
+    <string name="dialog_general_error_Message">There was an error making the request</string>
+    <string name="nombre_lugar_dialog">Nombre del Lugar</string>
+
+    <string name="view01">Variables</string>
+    <string name="view_gps01">GPS Data</string>
+    <string name="view_gps02">Address from GPS</string>
+    <string name="sat">Satelites:</string>
+    <string name="alt">Altitud:</string>
+    <string name="prec">Precision:</string>
+    <string name="vel">Speed:</string>
+    <string name="wmetros">Metros:</string>
+    <string name="direccion">Direccion:</string>
+    <string name="localidad">Localidad:</string>
+    <string name="provincia">State:</string>
+    <string name="pais">Countrie:</string>
+    <string name="cp">CP:</string>
+    <string name="title_activity_mis_sitios">Mis Sitios</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
