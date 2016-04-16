@@ -2,6 +2,7 @@ package com.unauto.android.common.clases;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.ParseUser;
+import com.unauto.android.common.activities.MisSitiosActivity;
 import com.unauto.dev.services.UnAuto.R;
 
 
@@ -46,8 +48,10 @@ public void GuardarMiSitio(String mName, final String mAddress, String mLatitude
                     String nombresitio = userInput.getText().toString();
                     Sitios sitios = new Sitios();//instancio la clase con el método guardar
                     boolean estado =  sitios.GuardarSitio( mUserName, nombresitio, address, latitude, longitude);
-                    if (estado)
+                    if (estado) {
                         Toast.makeText(context, "Sitio guardado correctamente!", Toast.LENGTH_SHORT).show();
+                        context.startActivity(new Intent(context, MisSitiosActivity.class));
+                    }
                     else
                         Toast.makeText(context, "Sorry!,no se pudo guardar el sitio!", Toast.LENGTH_SHORT).show();
                 }

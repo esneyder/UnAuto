@@ -16,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -112,6 +113,19 @@ private void setUpMapIfNeeded() {
     if (mMap == null) {
         mMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
         mMap.isMyLocationEnabled();
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng arg0) {
+                mMap.clear();
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(arg0);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+                Marker marker = mMap.addMarker(markerOptions);
+                marker.showInfoWindow();
+
+            }
+        });
         if (mMap != null) {
          }
     }

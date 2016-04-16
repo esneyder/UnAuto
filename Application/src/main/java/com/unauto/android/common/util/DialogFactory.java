@@ -1,14 +1,19 @@
 package com.unauto.android.common.util;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
+import com.unauto.android.common.activities.MisSitiosActivity;
 import com.unauto.android.common.clases.Sitios;
+import com.unauto.android.common.fragment.MisSitiosFragment;
 import com.unauto.dev.services.UnAuto.R;
 
 
@@ -50,8 +55,7 @@ public static ProgressDialog createProgressDialog(Context context, String messag
 public static ProgressDialog createProgressDialog(Context context, @StringRes int messageResoruce) {
     return createProgressDialog(context, context.getString(messageResoruce));
 }
-
-public static void OptionPlaces(final Context context, String objecId) {
+public static void OptionPlaces(final Activity context, String objecId) {
     final String idSitio=objecId;
     String[] opc = new String[]{"Eliminar"};
     android.support.v7.app.AlertDialog opciones =
@@ -63,14 +67,21 @@ public static void OptionPlaces(final Context context, String objecId) {
                                                     int selected) {
                                     if (selected == 0) {
                                        Sitios sitio=new Sitios();
-                                        if(sitio.Eliminar(idSitio))
+                                        if(sitio.Eliminar(idSitio)) {
                                             Toast.makeText(context, "Sitio eliminado", Toast.LENGTH_SHORT).show();
-                                        else
+                                            RecargarActitidad.reiniciarActivity(context);
+                                            MisSitiosFragment fragment = new MisSitiosFragment();
+                                            FragmentTransaction ft = context.getFragmentManager().beginTransaction();
+                                            ft.commit();
+
+                                            }else
                                             Toast.makeText(context, "No fue posible eliminar el sitio!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }).create();
     opciones.show();
 }
+
+
 }
 

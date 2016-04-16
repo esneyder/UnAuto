@@ -21,6 +21,7 @@ import com.unauto.android.common.activities.DetallesActivity;
 import com.unauto.android.common.clases.MisSitios;
 import com.unauto.android.common.logger.Log;
 import com.unauto.android.common.util.DialogFactory;
+import com.unauto.android.common.util.RecargarActitidad;
 import com.unauto.dev.services.UnAuto.R;
 
 
@@ -31,6 +32,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class MisSitiosFragment extends Fragment {
+public static final String TAG = "MisSitiosFragment";
 private ListView mSitios;
 private List<MisSitios> mLIstaSitios;
 AdaptadorSitios adaptadorMisSitios;
@@ -51,6 +53,7 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
     mSitios = (ListView) viewFragmento.findViewById(R.id.list_mis_sitios);
     mLIstaSitios = new ArrayList<>();
     adaptadorMisSitios=new AdaptadorSitios();
+    adaptadorMisSitios.notifyDataSetChanged();
     this.mSitios.setItemsCanFocus(false);
     this.mSitios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
@@ -59,7 +62,6 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             Intent intent=new Intent(getContext(), DetallesActivity.class);
             intent.putExtra("nombreSitio",sitios.getNombre());
             intent.putExtra("objectId",sitios.getIdSitio());
-
             startActivity(intent);
 
 
@@ -72,7 +74,7 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                                        int pos, long id) {
             MisSitios sitios=mLIstaSitios.get(pos);
             // TODO ir a la clase DialogFactory
-            DialogFactory.OptionPlaces(getContext(),sitios.getIdSitio());
+            DialogFactory.OptionPlaces(getActivity(),sitios.getIdSitio());
             adaptadorMisSitios.notifyDataSetChanged();
             return true;
         }
@@ -109,7 +111,6 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
 
     return viewFragmento;
 }
-
 private class AdaptadorSitios extends BaseAdapter {
 
     @Override
