@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.unauto.dev.playservices.UnAuto.R;
+import com.unauto.dev.services.UnAuto.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

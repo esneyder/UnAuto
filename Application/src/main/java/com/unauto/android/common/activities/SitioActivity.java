@@ -1,6 +1,5 @@
 package com.unauto.android.common.activities;
 
-import android.content.Context;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
@@ -27,8 +25,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.unauto.android.common.clases.SitiosController;
 import com.unauto.android.common.logger.Log;
-import com.unauto.android.common.util.MyCurrentLoctionListener;
-import com.unauto.dev.playservices.UnAuto.R;
+import com.unauto.dev.services.UnAuto.R;
 
 import java.io.IOException;
 import java.util.List;

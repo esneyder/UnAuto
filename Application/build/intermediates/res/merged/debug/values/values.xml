@@ -471,7 +471,7 @@
         <item name="android:windowEnterAnimation">@anim/design_bottom_sheet_slide_in</item>
         <item name="android:windowExitAnimation">@anim/design_bottom_sheet_slide_out</item>
     </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.Design.Light"/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
         <item name="listLayout">@layout/abc_select_dialog_material</item>
@@ -1720,7 +1720,7 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
     <style name="Theme.AppInvite.Preview.Base" parent="@android:style/Theme.Light.NoTitleBar"/>
-    <style name="Theme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Base" parent="Theme.Design.Light">
 
     </style>
     <style name="Theme.Design" parent="Theme.AppCompat">
@@ -1777,7 +1777,7 @@
         <item name="mediaRoutePauseDrawable">@drawable/mr_ic_pause_light</item>
         <item name="mediaRouteCastDrawable">@drawable/mr_ic_cast_light</item>
     </style>
-    <style name="Theme.Sample" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="Theme.Sample" parent="Theme.Design.Light"/>
     <style name="ThemeOverlay.AppCompat" parent="Base.ThemeOverlay.AppCompat"/>
     <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Dark" parent="Base.ThemeOverlay.AppCompat.Dark"/>

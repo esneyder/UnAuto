@@ -9,7 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.ParseUser;
-import com.unauto.dev.playservices.UnAuto.R;
+import com.unauto.dev.services.UnAuto.R;
+
 
 /**
  * Created by Developer on 14/04/2016.

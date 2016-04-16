@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.unauto.dev.playservices.UnAuto"
+    package="com.unauto.dev.services.UnAuto"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,7 +9,7 @@
         android:targetSdkVersion="23" />
 
     <permission
-        android:name="com.unauto.dev.playservices.UnAuto.permission.MAPS_RECEIVE"
+        android:name="com.unauto.dev.services.UnAuto.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.weaverprojects.gpstest.permission.MAPS_RECEIVE" />
@@ -29,7 +29,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:name="com.unauto.dev.playservices.UnAuto.StartUnAuto"
+        android:name="com.unauto.dev.services.UnAuto.StartUnAuto"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -48,7 +48,7 @@
             android:value="@string/parse_client_key" />
 
         <activity
-            android:name="com.unauto.dev.playservices.UnAuto.MainActivity"
+            android:name="com.unauto.dev.services.UnAuto.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -63,7 +63,7 @@
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unauto.dev.playservices.UnAuto.MainActivity" />
+                android:value="com.unauto.dev.services.UnAuto.MainActivity" />
         </activity>
         <activity
             android:name="com.unauto.android.common.activities.SitioActivity"
