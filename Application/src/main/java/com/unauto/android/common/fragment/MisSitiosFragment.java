@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -44,7 +45,6 @@ ParseUser obtenerUsuario = ParseUser.getCurrentUser();
 GPSTracker gps;
 double latitude;
 double longitude;
-
 public MisSitiosFragment() {
     // Required empty public constructor
 }
@@ -103,6 +103,7 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                     String direccion = (String) object.get("Direccion");
                     String Lat = (String) object.get("Latitude");
                     String Lng = (String) object.get("Longitude");
+                    Log.d("Lt",Lat);
                     MisSitios misSitios = new MisSitios(idSitio, usename, nombre, direccion, Lat, Lng);
                     mLIstaSitios.add(misSitios);
                 }
@@ -155,10 +156,27 @@ private class AdaptadorSitios extends BaseAdapter {
         MisSitios misSitios = mLIstaSitios.get(position);
         TextView txtNombreMiSitio = (TextView) filaView.findViewById(R.id.txtNombreSitio);
         TextView txtDireccion = (TextView) filaView.findViewById(R.id.txtDirecion);
+        TextView txtDistancia=(TextView) filaView.findViewById(R.id.txtDistancia);
+        String st=new String(misSitios.getDireccion());
 
         txtNombreMiSitio.setText(misSitios.getNombre());
-        txtDireccion.setText(misSitios.getDireccion());
+        txtDireccion.setText(st.substring(0,21));
+        Location loc1 = new Location("");
+        loc1.setLatitude(latitude);
+        loc1.setLongitude(longitude);
+        Location loc2 = new Location("");
+        double lt=Double.parseDouble(misSitios.getLatitude());
+        double lng=Double.parseDouble(misSitios.getLongitude());
+        loc2.setLatitude(lt);
+        loc2.setLongitude(lng);
 
+        float distanceInMeters = loc1.distanceTo(loc2);
+
+        if (distanceInMeters > 1000) {
+            txtDistancia.setText(Math.round(distanceInMeters) / 1000 + " Km");
+        } else {
+            txtDistancia.setText(Math.round(distanceInMeters) + " m");
+        }
         return filaView;
     }
 

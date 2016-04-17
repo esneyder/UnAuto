@@ -4,7 +4,7 @@
     api-level="19"
     density="hdpi"
     format="7"
-    timestamp="249900411558934" >
+    timestamp="4757943708344" >
 
     <task
         name="javac"
@@ -14,16 +14,16 @@
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="104" />
+        duration="0" />
     <task
         name="verifier"
-        duration="6" />
+        duration="0" />
 
     <artifact
         location="C:\Users\Developer\Desktop\UnAuto\Application\build\outputs\apk\Application-debug.apk"
         type="MAIN" />
 
-    <build timestamp="249900411558934" >
+    <build timestamp="4757943708344" >
         <artifact
             location="C:\Users\Developer\Desktop\UnAuto\Application\build\outputs\apk\Application-debug.apk"
             type="MAIN" />

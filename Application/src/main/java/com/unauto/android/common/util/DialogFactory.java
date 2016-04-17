@@ -72,10 +72,7 @@ public static void OptionPlaces(final Activity context, String objecId,String no
                                         Sitios sitio = new Sitios();
                                         if (sitio.Eliminar(idSitio)) {
                                             Toast.makeText(context, "Sitio eliminado", Toast.LENGTH_SHORT).show();
-                                            RecargarActitidad.reiniciarActivity(context);
-                                            MisSitiosFragment fragment = new MisSitiosFragment();
-                                            FragmentTransaction ft = context.getFragmentManager().beginTransaction();
-                                            ft.commit();
+                                            context.startActivity(new Intent(context, MisSitiosActivity.class));
                                         } else {
                                             Toast.makeText(context, "No fue posible eliminar el sitio!", Toast.LENGTH_SHORT).show();
                                         }

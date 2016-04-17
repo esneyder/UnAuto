@@ -17,13 +17,11 @@ public MisSitios(String idSitio, String username, String nombre,
 
     IdSitio = idSitio;
     this.username = username;
-    Nombre = nombre;
+    this.Nombre = nombre;
     Direccion = direccion;
-    latitude=latitude;
-    longitude=longitude;
+    this.Latitude=latitude;
+    this.Longitude=longitude;
 }
-
-
 
     public String getIdSitio() {
         return IdSitio;
