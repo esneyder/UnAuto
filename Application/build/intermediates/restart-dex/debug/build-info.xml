@@ -4,11 +4,11 @@
     api-level="19"
     density="hdpi"
     format="7"
-    timestamp="174894764203274" >
+    timestamp="249900411558934" >
 
     <task
         name="javac"
-        duration="4901" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
@@ -23,7 +23,7 @@
         location="C:\Users\Developer\Desktop\UnAuto\Application\build\outputs\apk\Application-debug.apk"
         type="MAIN" />
 
-    <build timestamp="174894764203274" >
+    <build timestamp="249900411558934" >
         <artifact
             location="C:\Users\Developer\Desktop\UnAuto\Application\build\outputs\apk\Application-debug.apk"
             type="MAIN" />

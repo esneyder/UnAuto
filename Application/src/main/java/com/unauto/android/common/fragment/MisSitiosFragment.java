@@ -2,6 +2,7 @@ package com.unauto.android.common.fragment;
 
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -21,10 +23,12 @@ import com.unauto.android.common.activities.DetallesActivity;
 import com.unauto.android.common.clases.MisSitios;
 import com.unauto.android.common.logger.Log;
 import com.unauto.android.common.util.DialogFactory;
+import com.unauto.android.common.util.GPSTracker;
 import com.unauto.android.common.util.RecargarActitidad;
 import com.unauto.dev.services.UnAuto.R;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +40,10 @@ public static final String TAG = "MisSitiosFragment";
 private ListView mSitios;
 private List<MisSitios> mLIstaSitios;
 AdaptadorSitios adaptadorMisSitios;
-ParseUser obtenerUsuario=ParseUser.getCurrentUser();
+ParseUser obtenerUsuario = ParseUser.getCurrentUser();
+GPSTracker gps;
+double latitude;
+double longitude;
 
 public MisSitiosFragment() {
     // Required empty public constructor
@@ -52,16 +59,16 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
 
     mSitios = (ListView) viewFragmento.findViewById(R.id.list_mis_sitios);
     mLIstaSitios = new ArrayList<>();
-    adaptadorMisSitios=new AdaptadorSitios();
+    adaptadorMisSitios = new AdaptadorSitios();
     adaptadorMisSitios.notifyDataSetChanged();
     this.mSitios.setItemsCanFocus(false);
     this.mSitios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            MisSitios sitios=mLIstaSitios.get(position);
-            Intent intent=new Intent(getContext(), DetallesActivity.class);
-            intent.putExtra("nombreSitio",sitios.getNombre());
-            intent.putExtra("objectId",sitios.getIdSitio());
+            MisSitios sitios = mLIstaSitios.get(position);
+            Intent intent = new Intent(getContext(), DetallesActivity.class);
+            intent.putExtra("nombreSitio", sitios.getNombre());
+            intent.putExtra("objectId", sitios.getIdSitio());
             startActivity(intent);
 
 
@@ -72,16 +79,16 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
 
         public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
-            MisSitios sitios=mLIstaSitios.get(pos);
+            MisSitios sitios = mLIstaSitios.get(pos);
             // TODO ir a la clase DialogFactory
-            DialogFactory.OptionPlaces(getActivity(),sitios.getIdSitio());
+            DialogFactory.OptionPlaces(getActivity(), sitios.getIdSitio(), sitios.getNombre());
             adaptadorMisSitios.notifyDataSetChanged();
             return true;
         }
     });
 
     //capturar el usuario en session
-    String userName=obtenerUsuario.getUsername();// usuario capturado
+    String userName = obtenerUsuario.getUsername();// usuario capturado
     ParseQuery<ParseObject> query = ParseQuery.getQuery("MisSitios");
     query.whereEqualTo("username", userName);
     query.findInBackground(new FindCallback<ParseObject>() {
@@ -89,17 +96,18 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             if (e == null) {
                 Log.d("Mis sitios", "Sitios " + favoritoList.size() + " Sitios");
 
-                for (ParseObject object:favoritoList)
-                {
-                    String idSitio=(String)object.getObjectId();
-                    String usename=(String)object.get("username");
-                    String nombre=(String) object.get("Nombre");
-                    String direccion=(String) object.get("Direccion");
-                    String Lat=(String) object.get("Latitude");
-                    String Lng=(String) object.get("Longitude");
-                    MisSitios misSitios=new MisSitios(idSitio,usename,nombre,direccion,Lat,Lng);
-
+                for (ParseObject object : favoritoList) {
+                    String idSitio = (String) object.getObjectId();
+                    String usename = (String) object.get("username");
+                    String nombre = (String) object.get("Nombre");
+                    String direccion = (String) object.get("Direccion");
+                    String Lat = (String) object.get("Latitude");
+                    String Lng = (String) object.get("Longitude");
+                    MisSitios misSitios = new MisSitios(idSitio, usename, nombre, direccion, Lat, Lng);
                     mLIstaSitios.add(misSitios);
+                }
+                if (adaptadorMisSitios.isEmpty()) {
+                    setText("vacio");
                 }
                 mSitios.setAdapter(adaptadorMisSitios);
                 adaptadorMisSitios.notifyDataSetChanged();
@@ -108,9 +116,22 @@ public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             }
         }
     });
-
+    gps = new GPSTracker(getActivity());
+    if (gps.canGetLocation()) {
+        latitude = gps.getLatitude();
+        longitude = gps.getLongitude();
+    } else {
+        gps.showSettingsAlert();
+    }
     return viewFragmento;
 }
+
+public void setText(String estado) {
+    RelativeLayout contenedor = (RelativeLayout) getView().findViewById(R.id.contenedor);
+    if (estado.equals("vacio"))
+        contenedor.setVisibility(View.VISIBLE);
+}
+
 private class AdaptadorSitios extends BaseAdapter {
 
     @Override
@@ -130,10 +151,14 @@ private class AdaptadorSitios extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View filaView=getActivity().getLayoutInflater().inflate(R.layout.item_mis_sitios,null);
-        MisSitios misSitios=mLIstaSitios.get(position);
-        TextView txtNombreMiSitio=(TextView) filaView.findViewById(R.id.txtNombreSitio);
+        View filaView = getActivity().getLayoutInflater().inflate(R.layout.item_mis_sitios, null);
+        MisSitios misSitios = mLIstaSitios.get(position);
+        TextView txtNombreMiSitio = (TextView) filaView.findViewById(R.id.txtNombreSitio);
+        TextView txtDireccion = (TextView) filaView.findViewById(R.id.txtDirecion);
+
         txtNombreMiSitio.setText(misSitios.getNombre());
+        txtDireccion.setText(misSitios.getDireccion());
+
         return filaView;
     }
 

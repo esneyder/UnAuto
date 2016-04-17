@@ -10,7 +10,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Mis Sitios"
         android:id="@+id/txtNombreSitio"
-        android:padding="8dp"/>
+        android:paddingLeft="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"

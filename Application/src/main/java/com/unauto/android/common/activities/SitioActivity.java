@@ -25,6 +25,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.unauto.android.common.clases.SitiosController;
 import com.unauto.android.common.logger.Log;
+import com.unauto.android.common.util.Direccion;
+import com.unauto.android.common.util.GPSTracker;
 import com.unauto.dev.services.UnAuto.R;
 
 import java.io.IOException;
@@ -34,8 +36,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SitioActivity extends UnAutoActivityBase implements PlaceSelectionListener, GoogleMap.OnMapClickListener,
-                                                                         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class SitioActivity extends UnAutoActivityBase implements PlaceSelectionListener, GoogleMap.OnMapClickListener {
 @Bind(R.id.place_details)
 TextView mPlaceDetailsText;
 @Bind(R.id.place_attribution)
@@ -46,10 +47,10 @@ TextView place_Lng;
 LinearLayout LLDatosSeleccionados;
 private GoogleMap googleMap;
 SitiosController miSitio;
-private Location mLastLocation;
-public LocationManager mLocationManager;
-
-
+Direccion doInBackground;
+GPSTracker gps;
+double latitude;
+double longitude;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -73,28 +74,33 @@ protected void onCreate(Bundle savedInstanceState) {
             miSitio.GuardarMiSitio(name, address, lat, lng);
         }
     });
+    doInBackground=new Direccion(this);
 
-    int LOCATION_REFRESH_TIME = 1000;
-    int LOCATION_REFRESH_DISTANCE = 5;
-
-    mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-    mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
-            LOCATION_REFRESH_DISTANCE, new MyCurrentLoctionListener());
 
 
     Log.d("datos ", mPlaceDetailsText.getText().toString());
-
+    gps = new GPSTracker(getApplication());
+    if (gps.canGetLocation()) {
+        latitude = gps.getLatitude();
+        longitude = gps.getLongitude();
+    } else {
+        gps.showSettingsAlert();
+    }
+    lanzarmapa(latitude,longitude);
 }
 
-private void lanzarmapa(double lt, double ln) {
+private void lanzarmapa(final double lt, final double ln) {
     try {
 
-        LatLng UnAuto = new LatLng(lt, ln);
+        final LatLng UnAuto = new LatLng(lt, ln);
+        String direccion = doInBackground.getAddress(UnAuto);
+        mPlaceDetailsText.setText(direccion);
+        mPlaceAttribution.setText(String.valueOf(UnAuto.latitude));
+        place_Lng.setText(String.valueOf(UnAuto.longitude));
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().
                                                                    findFragmentById(R.id.map)).getMap();
         }
-        String direccion = doInBackground(UnAuto);
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         final Marker TP = googleMap.addMarker(new MarkerOptions().
                                                                          position(UnAuto).title(direccion));
@@ -106,13 +112,15 @@ private void lanzarmapa(double lt, double ln) {
                 googleMap.clear();
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(arg0);
-                String direcion = doInBackground(arg0);
+                String direcion = doInBackground.getAddress(arg0);
                 mPlaceDetailsText.setText(direcion);
                 mPlaceAttribution.setText(String.valueOf(arg0.latitude));
                 place_Lng.setText(String.valueOf(arg0.longitude));
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
                 Marker marker = googleMap.addMarker(markerOptions);
                 marker.showInfoWindow();
+
+
 
             }
         });
@@ -148,81 +156,5 @@ public void onMapClick(LatLng latLng) {
     Marker marker = googleMap.addMarker(markerOptions);
     marker.showInfoWindow();
 }
-
-protected String doInBackground(LatLng... params) {
-    Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
-    double latitude = params[0].latitude;
-    double longitude = params[0].longitude;
-
-    List<android.location.Address> addresses = null;
-    String addressText = "";
-
-    try {
-        addresses = geocoder.getFromLocation(latitude, longitude, 1);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    if (addresses != null && addresses.size() > 0) {
-        android.location.Address address = addresses.get(0);
-
-        addressText = String.format("%s, %s %s, %s", address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
-                address.getLocality() != null ? address.getLocality() : "", address.getPostalCode() != null ? address.getPostalCode() : "", address.getCountryName());
-    }
-
-    return addressText;
-}
-
-
-@Override
-public void onConnected(@Nullable Bundle bundle) {
-
-}
-
-@Override
-public void onConnectionSuspended(int i) {
-
-}
-
-@Override
-public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-}
-
-private class MyCurrentLoctionListener implements android.location.LocationListener {
-
-    @Override
-    public void onLocationChanged(Location location) {
-        location.getLatitude();
-        location.getLongitude();
-
-        String myLocation = "Latitude = " + location.getLatitude() + " Longitude = " + location.getLongitude();
-
-        //I make a log to see the results
-        android.util.Log.e("MY CURRENT LOCATION", myLocation);
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        String direccion = doInBackground(latLng);
-        mPlaceDetailsText.setText(direccion);
-        mPlaceAttribution.setText(String.valueOf(latLng.latitude));
-        place_Lng.setText(String.valueOf(latLng.longitude));
-        lanzarmapa(location.getLatitude(), location.getLongitude());
-
-    }
-
-
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-
-    public void onProviderEnabled(String s) {
-
-    }
-
-    public void onProviderDisabled(String s) {
-
-    }
-}
-
 
 }

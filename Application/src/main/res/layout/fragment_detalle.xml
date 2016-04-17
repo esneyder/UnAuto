@@ -20,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
-        android:background="#fff">
+        android:background="#fff"
+        android:id="@+id/LLList">
 
         <ListView
             android:id="@+id/list_detalle_sitio"
@@ -28,6 +29,53 @@
             android:layout_height="83dp"
             android:layout_gravity="center_horizontal|bottom"
             ></ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="#ffffff"
+        android:padding="8dp"
+        android:id="@+id/LLDatosUpdate"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Actualizar registro"
+            android:id="@+id/txtxTexto"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Address"
+            android:id="@+id/txtdireccionupdate"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Lat"
+                android:id="@+id/txtLat"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Lng"
+                android:id="@+id/txtLng"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

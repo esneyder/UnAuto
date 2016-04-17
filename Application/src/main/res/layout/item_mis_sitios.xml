@@ -7,8 +7,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Mis Sitios"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nombre sitio"
         android:id="@+id/txtNombreSitio"
-        android:padding="8dp"/>
+        android:textColor="@color/abc_primary_text_material_light"
+        android:paddingLeft="8dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Dirección"
+        android:id="@+id/txtDirecion"
+        android:paddingLeft="8dp"
+        />
+
 </LinearLayout>

@@ -1,3 +1,3 @@
-CHANGED,C:\Users\Developer\Desktop\UnAuto\Application\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\unauto\android\common\fragment\MisSitiosFragment$override.class
-CHANGED,C:\Users\Developer\Desktop\UnAuto\Application\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\unauto\android\common\fragment\MisSitiosFragment$AdaptadorSitios$override.class
+CHANGED,C:\Users\Developer\Desktop\UnAuto\Application\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\unauto\android\common\activities\SitioActivity$2$override.class
+CHANGED,C:\Users\Developer\Desktop\UnAuto\Application\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\unauto\android\common\activities\SitioActivity$override.class
 CHANGED,C:\Users\Developer\Desktop\UnAuto\Application\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class

@@ -408,7 +408,6 @@
     <string name="dialog_error_title">Oops</string>
     <string name="dialog_general_error_Message">There was an error making the request</string>
     <string name="direccion">Direccion:</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="intro_message">
         
         
@@ -451,11 +450,14 @@
     </string>
     <string name="prec">Precision:</string>
     <string name="provincia">State:</string>
+    <string name="rename_sitio">Renombrar sitio</string>
     <string name="sat">Satelites:</string>
     <string name="selected_place">Seleccionar Sitio</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
     <string name="store_picture_title">Save image</string>
+    <string name="text_description">Añade los sitios más visitados. Ej: Casa, Trabajo. Toca +</string>
+    <string name="text_title">No tienes sitios guardados.</string>
     <string name="title_activity_mis_sitios">Mis Sitios</string>
     <string name="vel">Speed:</string>
     <string name="view01">Variables</string>

@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,9 +27,13 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.unauto.android.common.clases.MisSitios;
+import com.unauto.android.common.clases.SitiosController;
 import com.unauto.android.common.logger.Log;
+import com.unauto.android.common.util.Direccion;
 import com.unauto.dev.services.UnAuto.R;
 
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +48,12 @@ private double mLatitude;
 private double mLongitude;
 private String mNombreSitio;
 private String mObjectId;
-ParseUser obtenerUsuario=ParseUser.getCurrentUser();
+ParseUser obtenerUsuario = ParseUser.getCurrentUser();
 private GoogleMap mMap;
 AdaptadorSitios adaptadorMisSitios;
+SitiosController miSitio;
+Direccion doInBackground;
+Intent in;
 public DetalleFragment() {
     // Required empty public constructor
 }
@@ -58,12 +68,16 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
     mSitios = (ListView) viewFragmento.findViewById(R.id.list_detalle_sitio);
     mLIstaSitios = new ArrayList<>();
     this.mSitios.setItemsCanFocus(false);
-    adaptadorMisSitios=new AdaptadorSitios();
+    adaptadorMisSitios = new AdaptadorSitios();
+    miSitio = new SitiosController(getActivity());
+    doInBackground = new Direccion(getActivity());
+
     setUpMapIfNeeded();
-    Intent in = getActivity().getIntent();
-    mObjectId=in.getStringExtra("objectId");
+    in = getActivity().getIntent();
+    mObjectId = in.getStringExtra("objectId");
+    mNombreSitio=in.getStringExtra("nombreSitio");
     //capturar el usuario en session
-    String userName=obtenerUsuario.getUsername();// usuario capturado
+    String userName = obtenerUsuario.getUsername();// usuario capturado
     ParseQuery<ParseObject> query = ParseQuery.getQuery("MisSitios");
     query.whereEqualTo("objectId", mObjectId);
     query.findInBackground(new FindCallback<ParseObject>() {
@@ -71,17 +85,16 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
             if (e == null) {
                 Log.d("Mis sitios", "Sitios " + favoritoList.size() + " Sitios");
 
-                for (ParseObject object:favoritoList)
-                {
-                    String idSitio=(String)object.getObjectId();
-                    String usename=(String)object.get("username");
-                    String nombre=(String) object.get("Nombre");
-                    mNombreSitio=nombre;
-                    String direccion=(String) object.get("Direccion");
-                    String Lat=(String) object.get("Latitude");
-                    String Lng=(String) object.get("Longitude");
-                    MisSitios misSitios=new MisSitios(idSitio,usename,nombre,direccion,Lat,Lng);
-                    LatLng latLng=new LatLng(Double.parseDouble(Lat),Double.parseDouble(Lng));
+                for (ParseObject object : favoritoList) {
+                    String idSitio = (String) object.getObjectId();
+                    String usename = (String) object.get("username");
+                    String nombre = (String) object.get("Nombre");
+                    mNombreSitio = nombre;
+                    String direccion = (String) object.get("Direccion");
+                    String Lat = (String) object.get("Latitude");
+                    String Lng = (String) object.get("Longitude");
+                    MisSitios misSitios = new MisSitios(idSitio, usename, nombre, direccion, Lat, Lng);
+                    LatLng latLng = new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lng));
                     mMap.addMarker(new MarkerOptions().position(latLng).title(nombre));
                     CameraPosition cameraPosition = new CameraPosition.Builder()
                                                             .target(latLng)      // Sets the center of the map to Mountain View
@@ -101,13 +114,38 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         }
     });
 
+
     return viewFragmento;
 }
+
+public void setText(String text,String lat,String lng) {
+    LinearLayout llupdate=(LinearLayout) getView().findViewById(R.id.LLDatosUpdate);
+    llupdate.setVisibility(View.VISIBLE);
+    final TextView textView = (TextView) getView().findViewById(R.id.txtdireccionupdate);
+    final TextView textLat=(TextView) getView().findViewById(R.id.txtLat);
+    final TextView textLng=(TextView)getView().findViewById(R.id.txtLng);
+    textView.setText(text);
+    textLat.setText(lat);
+    textLng.setText(lng);
+    llupdate.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            miSitio.ActualizarMiSitio(mObjectId,mNombreSitio,
+                    textView.getText().toString(),
+                    textLat.getText().toString(),
+                    textLng.getText().toString());
+
+        }
+    });
+
+}
+
 @Override
 public void onResume() {
     super.onResume();
     setUpMapIfNeeded();
 }
+
 private void setUpMapIfNeeded() {
 
     if (mMap == null) {
@@ -123,11 +161,13 @@ private void setUpMapIfNeeded() {
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
                 Marker marker = mMap.addMarker(markerOptions);
                 marker.showInfoWindow();
+                String direcion = doInBackground.getAddress(arg0);
+                setText(direcion,String.valueOf(arg0.latitude),String.valueOf(arg0.longitude));
 
             }
         });
         if (mMap != null) {
-         }
+        }
     }
 }
 
@@ -150,15 +190,16 @@ private class AdaptadorSitios extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View filaView=getActivity().getLayoutInflater().inflate(R.layout.item_detalle_sitios,null);
-        MisSitios misSitios=mLIstaSitios.get(position);
-        TextView txtNombreMiSitio=(TextView) filaView.findViewById(R.id.txtNombreSitio);
-        TextView txtdirecion=(TextView) filaView.findViewById(R.id.txtdireccion);
+        View filaView = getActivity().getLayoutInflater().inflate(R.layout.item_detalle_sitios, null);
+        MisSitios misSitios = mLIstaSitios.get(position);
+        TextView txtNombreMiSitio = (TextView) filaView.findViewById(R.id.txtNombreSitio);
+        TextView txtdirecion = (TextView) filaView.findViewById(R.id.txtdireccion);
         txtNombreMiSitio.setText(misSitios.getNombre());
         txtdirecion.setText(misSitios.getDireccion());
         return filaView;
     }
 
 }
+
 }
 

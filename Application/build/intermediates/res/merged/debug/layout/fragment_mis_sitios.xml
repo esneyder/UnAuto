@@ -8,6 +8,39 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/list_mis_sitios"
-      ></ListView>
+      android:visibility="visible"></ListView>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:weightSum="1"
+      android:id="@+id/contenedor"
+      android:visibility="gone">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/text_title"
+        android:id="@+id/txtTitle"
+        android:textColor="@color/button_material_dark"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/text_description"
+        android:id="@+id/txtDescription"
+        android:textColor="@color/button_material_dark"
+        android:padding="10dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="20dp"/>
+
+  </RelativeLayout>
+
 
 </FrameLayout>

@@ -1,5 +1,6 @@
 package com.unauto.android.common.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Geocoder;
 
@@ -13,13 +14,13 @@ import java.util.Locale;
  * Created by Developer on 15/04/2016.
  */
 public class Direccion {
-Context context;
+Activity context;
 
-public Direccion(Context ctx) {
+public Direccion(Activity ctx) {
     context = ctx;
 }
 
-public String doInBackground(LatLng... params) {
+public String getAddress(LatLng... params) {
     Geocoder geocoder = new Geocoder(context, Locale.ENGLISH);
     double latitude = params[0].latitude;
     double longitude = params[0].longitude;
