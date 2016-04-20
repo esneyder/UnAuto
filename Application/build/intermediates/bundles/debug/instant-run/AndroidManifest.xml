@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.unauto.dev.services.UnAuto"
+    package="com.unauto"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1" >
 
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="23" />
 
-    <permission
-        android:name="com.unauto.dev.services.UnAuto.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="com.weaverprojects.gpstest.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <!--
+     The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+    -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
+    <!-- OpenGL ES version 2 (for google maps v2) -->
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
- <!-- Permissions required for GCM -->
+
+    <!-- Permissions required for GCM -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
  <!-- Optional permission for App measurement to run. -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -40,7 +42,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAEJZ1SWQSaFBf9rSnJzRlgmQ3GBNCGz0w" />
+            android:value="AIzaSyAYMJslNLBA32ToNW4cCoHBzzuXQrOvWns" />
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="@string/parse_app_id" />
@@ -111,7 +113,7 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
 
         <provider
             android:name="com.google.android.gms.measurement.AppMeasurementContentProvider"
-            android:authorities="com.google.android.gms.measurement.google_measurement_service"
+            android:authorities="com.unauto.google_measurement_service"
             android:exported="false" />
 
         <receiver

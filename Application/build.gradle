@@ -33,17 +33,17 @@ List<String> dirs = [
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
+        versionCode 1
+        versionName "1"
+        applicationId 'com.unauto'
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
-
     sourceSets {
         main {
             dirs.each { dir ->
@@ -55,7 +55,21 @@ android {
         androidTest.java.srcDirs = ['tests/src']
 
     }
+    productFlavors {
+    }
 
+    buildTypes {
+        release{}
+        trial{
+            applicationIdSuffix ".trial"
+        }
+        paid{
+            applicationIdSuffix ".paid"
+        }
+        staging{
+            applicationIdSuffix ".staging"
+        }
+    }
 }
 
 

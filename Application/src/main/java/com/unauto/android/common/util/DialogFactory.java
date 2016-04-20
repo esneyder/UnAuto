@@ -3,7 +3,7 @@ package com.unauto.android.common.util;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentTransaction;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,12 +11,11 @@ import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
+
+import com.unauto.R;
 import com.unauto.android.common.activities.MisSitiosActivity;
 import com.unauto.android.common.clases.Sitios;
 import com.unauto.android.common.clases.SitiosController;
-import com.unauto.android.common.fragment.MisSitiosFragment;
-import com.unauto.dev.services.UnAuto.R;
-
 
 /**
  * Created by Developer on 14/04/2016.

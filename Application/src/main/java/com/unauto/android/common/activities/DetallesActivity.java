@@ -3,11 +3,8 @@ package com.unauto.android.common.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.unauto.android.common.logger.Log;
-import com.unauto.dev.services.UnAuto.R;
+import com.unauto.R;
 
 
 public class DetallesActivity extends AppCompatActivity {

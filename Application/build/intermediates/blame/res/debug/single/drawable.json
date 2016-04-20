@@ -120,12 +120,12 @@
         "source": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\8.4.0\\res\\drawable\\common_plus_signin_btn_text_light.xml"
     },
     {
-        "merged": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\res\\merged\\debug\\drawable\\cast_ic_notification_connecting.xml",
-        "source": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast\\8.4.0\\res\\drawable\\cast_ic_notification_connecting.xml"
-    },
-    {
         "merged": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
         "source": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\res\\merged\\debug\\drawable\\cast_ic_notification_connecting.xml",
+        "source": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast\\8.4.0\\res\\drawable\\cast_ic_notification_connecting.xml"
     },
     {
         "merged": "C:\\Users\\Developer\\Desktop\\UnAuto\\Application\\build\\intermediates\\res\\merged\\debug\\drawable\\mr_ic_media_route_mono_dark.xml",

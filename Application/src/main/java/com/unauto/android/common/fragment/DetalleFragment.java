@@ -27,14 +27,12 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import com.unauto.R;
 import com.unauto.android.common.clases.MisSitios;
 import com.unauto.android.common.clases.SitiosController;
 import com.unauto.android.common.logger.Log;
 import com.unauto.android.common.util.Direccion;
-import com.unauto.dev.services.UnAuto.R;
-
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;

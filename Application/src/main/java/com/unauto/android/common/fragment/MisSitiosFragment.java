@@ -20,16 +20,13 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import com.unauto.R;
 import com.unauto.android.common.activities.DetallesActivity;
 import com.unauto.android.common.clases.MisSitios;
 import com.unauto.android.common.logger.Log;
 import com.unauto.android.common.util.DialogFactory;
 import com.unauto.android.common.util.GPSTracker;
-import com.unauto.android.common.util.RecargarActitidad;
-import com.unauto.dev.services.UnAuto.R;
-
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 

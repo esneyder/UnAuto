@@ -23,15 +23,12 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.unauto.R;
 import com.unauto.android.common.clases.SitiosController;
 import com.unauto.android.common.logger.Log;
 import com.unauto.android.common.util.Direccion;
 import com.unauto.android.common.util.GPSTracker;
-import com.unauto.dev.services.UnAuto.R;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

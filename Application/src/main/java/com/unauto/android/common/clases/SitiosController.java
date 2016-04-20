@@ -9,14 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.unauto.android.common.activities.DetallesActivity;
+
+
+import com.unauto.R;
 import com.unauto.android.common.activities.MisSitiosActivity;
-import com.unauto.dev.services.UnAuto.R;
+
 
 
 /**
